@@ -48,7 +48,10 @@ type Income types.Income
 func (r *Income) AfterFind(db *gorm.DB) error {
 	r.Item = Transform(r.Item)
 	r.Role = Transform(r.Role)
-	r.Date = r.Date.In(time.Local)
+	r.Date = time.Date(r.Date.Year(), r.Date.Month(),
+		r.Date.Day(), r.Date.Hour(),
+		r.Date.Minute(), r.Date.Second(),
+		r.Date.Nanosecond(), time.Local)
 	return nil
 }
 

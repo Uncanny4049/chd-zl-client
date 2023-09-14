@@ -51,8 +51,6 @@ func (r *CopyRecord) TableName() string {
 
 func GetCopyRecord(c zlold.CopyRecord) *CopyRecord {
 	row := strings.Split(c.Types, ",")
-	r2 := strings.Split(row[2], ":")
-	r3 := strings.Split(row[3], ":")
 	ToInt := func(s string) int {
 		intNum, _ := strconv.Atoi(s)
 		return intNum
@@ -66,8 +64,8 @@ func GetCopyRecord(c zlold.CopyRecord) *CopyRecord {
 		},
 		CopyName:             row[0],
 		Status:               row[1],
-		StartTime:            time.Date(c.Date.Year(), c.Date.Month(), c.Date.Day(), ToInt(r2[0]), ToInt(r2[1]), ToInt(r2[2]), 0, time.Local),
-		EndTime:              time.Date(c.Date.Year(), c.Date.Month(), c.Date.Day(), ToInt(r3[0]), ToInt(r3[1]), ToInt(r3[2]), 0, time.Local),
+		StartTime:            ToDate(row[2], c.Date),
+		EndTime:              ToDate(row[3], c.Date),
 		Predict:              ToInt(row[5]),
 		Actual:               ToInt(row[6]),
 		Revival:              ToInt(row[7]),
@@ -117,4 +115,16 @@ type TaskInfo types.TaskInfo
 
 func (r *TaskInfo) TableName() string {
 	return "TaskInfo"
+}
+
+func ToDate(dateStr string, date time.Time) time.Time {
+	ToInt := func(s string) int {
+		intNum, _ := strconv.Atoi(s)
+		return intNum
+	}
+	dateSlice := strings.Split(dateStr, ":")
+	if len(dateSlice) == 3 {
+		return time.Date(date.Year(), date.Month(), date.Day(), ToInt(dateSlice[0]), ToInt(dateSlice[1]), ToInt(dateSlice[2]), 0, time.Local)
+	}
+	return date
 }
