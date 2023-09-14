@@ -2,9 +2,10 @@ package services
 
 import (
 	"fmt"
-	"github.com/Capsule7446/chd-zl-client/database/zlnew"
-	"github.com/Capsule7446/chd-zl-types/types"
 	"time"
+
+	"github.com/Uncanny4049/chd-zl-client/database/zlnew"
+	"github.com/Uncanny4049/chd-zl-types/types"
 )
 
 type CopyRecord struct {

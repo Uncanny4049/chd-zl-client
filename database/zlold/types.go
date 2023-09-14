@@ -1,10 +1,11 @@
 package zlold
 
 import (
-	"github.com/Capsule7446/chd-zl-types/types"
+	"time"
+
+	"github.com/Uncanny4049/chd-zl-types/types"
 	"github.com/axgle/mahonia"
 	"gorm.io/gorm"
-	"time"
 )
 
 var decoder = mahonia.NewDecoder("gbk")

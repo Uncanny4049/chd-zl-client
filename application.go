@@ -2,11 +2,12 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/Capsule7446/chd-zl-client/database/zlnew"
-	"github.com/Capsule7446/chd-zl-client/database/zlold"
-	"github.com/Capsule7446/chd-zl-client/module/services"
-	"github.com/Capsule7446/chd-zl-client/module/types"
 	"time"
+
+	"github.com/Uncanny4049/chd-zl-client/database/zlnew"
+	"github.com/Uncanny4049/chd-zl-client/database/zlold"
+	"github.com/Uncanny4049/chd-zl-client/module/services"
+	"github.com/Uncanny4049/chd-zl-client/module/types"
 )
 
 func main() {

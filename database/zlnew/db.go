@@ -1,7 +1,6 @@
 package zlnew
 
 import (
-	"github.com/Capsule7446/chd-zl-client/module/types"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )

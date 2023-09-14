@@ -1,8 +1,8 @@
 package zlnew
 
 import (
-	"github.com/Capsule7446/chd-zl-client/database/zlold"
-	"github.com/Capsule7446/chd-zl-types/types"
+	"github.com/Uncanny4049/chd-zl-client/database/zlold"
+	"github.com/Uncanny4049/chd-zl-types/types"
 	"strconv"
 	"strings"
 	"time"

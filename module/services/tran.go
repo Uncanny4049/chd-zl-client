@@ -2,12 +2,13 @@ package services
 
 import (
 	"errors"
-	"github.com/Capsule7446/chd-zl-client/database/zlnew"
-	"github.com/Capsule7446/chd-zl-client/database/zlold"
-	"github.com/Capsule7446/chd-zl-types/types"
-	"gorm.io/gorm"
 	"log"
 	"sync"
+
+	"github.com/Uncanny4049/chd-zl-client/database/zlnew"
+	"github.com/Uncanny4049/chd-zl-client/database/zlold"
+	"github.com/Uncanny4049/chd-zl-types/types"
+	"gorm.io/gorm"
 )
 
 var wg sync.WaitGroup
