@@ -6,7 +6,7 @@ import (
 	"github.com/Capsule7446/chd-zl-client/database/zlold"
 	"github.com/Capsule7446/chd-zl-client/module/services"
 	"github.com/Capsule7446/chd-zl-client/module/types"
-	"log"
+	"time"
 )
 
 func main() {
@@ -14,14 +14,13 @@ func main() {
 	zlold.Init(config)
 	zlnew.Init(config)
 	//services.Tran()
-	var ncrs []zlnew.CopyRecord
-	zlnew.DB.Find(&ncrs)
-	for _, item := range ncrs {
-		info := services.GetCopyInfo(&item)
-		if len(info.Type1) == 0 && len(info.Type2) == 0 && len(info.Type3) == 0 && len(info.Type4) == 0 {
-			continue
-		}
-		marshal, _ := json.Marshal(info)
-		log.Println(string(marshal))
+
+	//data := services.GetCopyByDate("\uE812\uE812我饿了\uE812\uE812", time.Date(2023, 9, 5, 0, 0, 0, 0, time.Local))
+	data := services.GetAllRole()
+	d := make(map[string][]services.CopyRecord)
+	for _, role := range data {
+		d[role] = services.GetCopyByDate(role, time.Date(2023, 9, 5, 0, 0, 0, 0, time.Local))
 	}
+	marshal, _ := json.Marshal(d)
+	println(string(marshal))
 }
