@@ -9,10 +9,10 @@ import (
 )
 
 type CopyRecord struct {
-	*zlnew.CopyRecord
-	Type1 []string       `json:"type1"`
-	Type2 []string       `json:"type2"`
-	Type3 []string       `json:"type3"`
+	zlnew.CopyRecord
+	Type1 []string       `json:"type1"` // 死亡次数
+	Type2 []string       `json:"type2"` // 掉线重连
+	Type3 []string       `json:"type3"` // 激活图鉴
 	Type4 map[string]int `json:"type4"`
 }
 
@@ -20,19 +20,19 @@ func GetCopyByDate(role string, date time.Time) []CopyRecord {
 	start := time.Date(date.Year(), date.Month(), date.Day(), 0, 0, 0, 0, date.Location())
 	end := time.Date(date.Year(), date.Month(), date.Day()+1, 0, 0, 0, 0, date.Location())
 	var ncrs []zlnew.CopyRecord
-	zlnew.DB.Where(zlnew.CopyRecord{
+	zlnew.DB.Debug().Where(zlnew.CopyRecord{
 		CopyRecord: &types.CopyRecord{
 			Role: role,
 		},
 	}).Where("date BETWEEN ? AND ?", start, end).Find(&ncrs)
 	result := make([]CopyRecord, 0)
 	for _, item := range ncrs {
-		result = append(result, GetCopyInfo(&item))
+		result = append(result, GetCopyInfo(item))
 	}
 	return result
 }
 
-func GetCopyInfo(copy *zlnew.CopyRecord) CopyRecord {
+func GetCopyInfo(copy zlnew.CopyRecord) CopyRecord {
 	var ars []zlnew.ActionRecord
 	zlnew.DB.Where(&zlnew.ActionRecord{
 		Role: copy.Role,
