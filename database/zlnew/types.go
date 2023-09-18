@@ -15,7 +15,7 @@ func (r *ActionRecord) TableName() string {
 }
 
 type CopyRecord struct {
-	*types.CopyRecord
+	types.CopyRecord
 	CopyName             string    `json:"copyName,omitempty"`             //副本名称
 	Status               string    `json:"status,omitempty"`               //完成状态
 	StartTime            time.Time `json:"startTime,omitempty"`            // 开始时间
@@ -55,8 +55,13 @@ func GetCopyRecord(c zlold.CopyRecord) *CopyRecord {
 		intNum, _ := strconv.Atoi(s)
 		return intNum
 	}
+	s := ToDate(row[2], c.Date)
+	e := ToDate(row[3], c.Date)
+	if s.After(e) {
+		s = s.Add(-24 * time.Hour)
+	}
 	ncr := CopyRecord{
-		CopyRecord: &types.CopyRecord{
+		CopyRecord: types.CopyRecord{
 			Idx:   c.Idx,
 			Role:  c.Role,
 			Types: c.Types,
@@ -64,8 +69,8 @@ func GetCopyRecord(c zlold.CopyRecord) *CopyRecord {
 		},
 		CopyName:             row[0],
 		Status:               row[1],
-		StartTime:            ToDate(row[2], c.Date),
-		EndTime:              ToDate(row[3], c.Date),
+		StartTime:            s,
+		EndTime:              e,
 		Predict:              ToInt(row[5]),
 		Actual:               ToInt(row[6]),
 		Revival:              ToInt(row[7]),

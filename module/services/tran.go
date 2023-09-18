@@ -81,7 +81,7 @@ func TranCopyRecord() {
 	var _new zlnew.CopyRecord
 	if errors.Is(zlnew.DB.Last(&_new).Error, gorm.ErrRecordNotFound) {
 		_new = zlnew.CopyRecord{
-			CopyRecord: &types.CopyRecord{Idx: 1},
+			CopyRecord: types.CopyRecord{Idx: 1},
 		}
 	}
 	var old []zlold.CopyRecord
